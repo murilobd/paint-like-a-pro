@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tensorflow/3.15.0/tf.min.js"
+		integrity="sha512-NKf5nJ4CKWnnxoqAb12Jhpp3XUtPl1zRkb8LIHZ6xpmDQoFdNAyx0ErCGgCLnjaupdHsIkjFrnaqZLoVQItytg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<style>
+		.app {
+			display: inline-flex;
+		}
+
+		.app>div {
+			display: flex;
+			align-items: center;
+		}
+
+		canvas {
+			border: 1px solid black;
+			margin-right: 15px;
+			margin-left: 15px;
+		}
+	</style>
+	<title>Document</title>
+</head>
+
+<body onload="init()">
+	<span id="status">Loading models</span>
+	<div>
+		<div>
+			<input type="file" id="uploadFile">
+		</div>
+	</div>
+	<div class="app">
+		<div>
+			<div>
+				<ul>
+					<li>
+						<input type="radio" id="brushColorBlack" name="drawToolColor" value="black"
+							onchange="changedBrushColor('black')" checked>
+						<label for="brushColorBlack">
+							Brush
+						</label>
+					</li>
+					<li>
+						<input type="radio" id="brushColorWhite" name="drawToolColor" value="white"
+							onchange="changedBrushColor('white')">
+						<label for="brushColorWhite">
+							Eraser
+						</label>
+					</li>
+					<li>
+						<label for="brushSize">Brush size</label>
+						<input type="range" id="brushSize" name="brushSize" min="0.5" max="5" value="2" step="0.1"
+							onchange="changeBrushSize">
+					</li>
+				</ul>
+			</div>
+			<canvas id="input" width="256" height="256"></canvas>
+			<div style="display: flex; flex-direction: column;">
+				<button id="paintBtn" disabled="disabled">
+					Paint
+				</button>
+				<button id="clearBtn" disabled="disabled">
+					Clear
+				</button>
+			</div>
+		</div>
+		<div>
+			<canvas id="output" width="256" height="256"></canvas>
+		</div>
+		<div style="display:none;">
+			<div>
+				<button id="styleBtn" disabled="disabled">
+					Transfer style
+				</button>
+			</div>
+			<canvas id="outputStyle" width="256" height="256"></canvas>
+		</div>
+		<div>
+			<button id="downloadBtn" disabled="disabled">
+				Download your paintings
+			</button>
+		</div>
+	</div>
+
+	<div id="listStyles" style="display:none;">
+		<ul>
+			<li>
+				<input type="radio" id="style1" name="style" value="style1" onchange="changedStyle('style1')" checked>
+				<label for="style1">
+					<img id="style1" src="imgs/style1.jpg" width="250" />
+				</label>
+			</li>
+			<li>
+				<input type="radio" id="style2" name="style" value="style2" onchange="changedStyle('style2')">
+				<label for="style2">
+					<img id="style2" src="imgs/style2.jpg" width="250" />
+				</label>
+			</li>
+			<li>
+				<input type="radio" id="style3" name="style" value="style3" onchange="changedStyle('style3')">
+				<label for="style3">
+					<img id="style3" src="imgs/style3.jpg" width="250" />
+				</label>
+			</li>
+			<li>
+				<input type="radio" id="style4" name="style" value="style4" onchange="changedStyle('style4')">
+				<label for="style4">
+					<img id="style4" src="imgs/style4.jpg" width="250" />
+				</label>
+			</li>
+			<li>
+				<input type="radio" id="style5" name="style" value="style5" onchange="changedStyle('style5')">
+				<label for="style5">
+					<img id="style5" src="imgs/style5.jpg" width="250" />
+				</label>
+			</li>
+		</ul>
+	</div>
+
+	<script src="./canvas-draw.js"></script>
+	<script src="./app.js"></script>
+</body>
+
+</html>
